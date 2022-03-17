@@ -105,6 +105,7 @@ fi
 if [[ $TERM_PROGRAM == 'iTerm.app' && $0 == '-zsh' ]]; then
   clear
   echo
+  echo
   neofetch
 fi
 

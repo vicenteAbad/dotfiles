@@ -20,10 +20,26 @@ autocmd BufWinEnter * silent NERDTreeMirror
 
 " Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-    \ quit | endif
+			\ quit | endif
 
 
-nnoremap <C-s> :ConqueTermSplit zsh<CR>
+let g:activate = "0"
+let g:wid = "0"
+function ConqueTermSplitActivate()
+    if g:activate == "0"
+	ConqueTermSplit zsh
+	resize 10
+        let g:activate = "1"
+        let g:wid = win_getid()
+	echo "ConqueTermSplit activate"
+    else
+	call win_gotoid(g:wid)
+	quit
+        let g:activate = "0"	
+	echo "ConqueTermSplit desactivate"
+    endif
+endfunction
+nmap <C-s> :call ConqueTermSplitActivate() <CR>
 
 set number
 nmap <f2> :set number! number?<cr>
