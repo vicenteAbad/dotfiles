@@ -1,6 +1,7 @@
 call plug#begin()
 Plug 'preservim/NERDTree'
 Plug 'itchyny/lightline.vim'
+Plug 'lrvick/Conque-Shell'
 call plug#end()
 
 nnoremap <leader>n :NERDTreeFocus<CR>
@@ -20,3 +21,10 @@ autocmd BufWinEnter * silent NERDTreeMirror
 " Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
     \ quit | endif
+
+
+nnoremap <C-s> :ConqueTermSplit zsh<CR>
+
+set number
+nmap <f2> :set number! number?<cr>
+nmap <f3> :set relativenumber! relativenumber? <cr>
