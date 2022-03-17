@@ -102,3 +102,6 @@ source $ZSH/oh-my-zsh.sh
 if [[ $OSTYPE == 'darwin'* ]]; then
   alias vim='mvim -v'
 fi
+clear
+echo
+neofetch
