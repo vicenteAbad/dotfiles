@@ -99,4 +99,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim='mvim -v'
+if [[ $OSTYPE == 'darwin'* ]]; then
+  alias vim='mvim -v'
+fi
