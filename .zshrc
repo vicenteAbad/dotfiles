@@ -101,6 +101,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 if [[ $OSTYPE == 'darwin'* ]]; then
   alias vim='mvim -v'
+  alias whatweb=/Users/abad/Applications/WhatWeb/whatweb
 fi
 if [[ $TERM_PROGRAM == 'iTerm.app' && $0 == '-zsh' ]]; then
   clear
@@ -108,6 +109,7 @@ if [[ $TERM_PROGRAM == 'iTerm.app' && $0 == '-zsh' ]]; then
   echo
   neofetch
 fi
+
 
 
 
