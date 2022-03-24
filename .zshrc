@@ -109,7 +109,5 @@ if [[ $TERM_PROGRAM == 'iTerm.app' && $0 == '-zsh' ]]; then
   echo
   neofetch
 fi
-
-
-
-
+writevartmux(){ echo $1 > ~/.vars.txt  }
+readvartmux(){ cat ~/.vars.txt | tr '\n' ' ' }
