@@ -127,18 +127,25 @@ writevartmux(){
   ;;
 
   1)
-    if grep $1 $file &> /dev/null; then
-       grep $1 $file > $filechoise
-    else
-       echo "$1 dont exits"
-       return 1
-    fi    
-    echo "$1 is fixed var now"
+    	  
+    if [ "$1" = 'clear' ]; then
+       rm $file $filechoise && touch $file $filechoise	     
+       echo "clear all vars in tmuxvars" 
+    else	     
+      if grep $1 $file &> /dev/null; then
+         grep $1 $file > $filechoise
+      else
+         echo "$1 dont exits"
+         return 1
+      fi    
+      echo "$1 is fixed var now"
+    fi
   ;;
 
   *)
     echo "writevartmux name value : create/update vars"
     echo "writevartmux name       : choise var"
+    echo "writevartmux clear      : clear all vars"
     return 1
   ;;
   esac
@@ -148,7 +155,7 @@ readvartmux(){
   filechoise="$HOME/.varschoise.txt"
   case "$#" in
   1)
-     grep "$1=" $file | cut -f 2 -d '='
+    grep "$1=" $file | cut -f 2 -d '='
   ;;
   *)  
     while IFS= read -r line
