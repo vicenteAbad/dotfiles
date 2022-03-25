@@ -109,5 +109,53 @@ if [[ $TERM_PROGRAM == 'iTerm.app' && $0 == '-zsh' ]]; then
   echo
   neofetch
 fi
-writevartmux(){ echo $1 > ~/.vars.txt  }
-readvartmux(){ cat ~/.vars.txt | tr '\n' ' ' }
+writevartmux(){
+  file="$HOME/.vars.txt"     	
+  filechoise="$HOME/.varschoise.txt"
+  [ -f $file ] || touch $file  
+  case "$#" in
+ 
+  2)
+    if grep $1 $file &> /dev/null; then
+       value=$(grep $1 $file | cut -f 2 -d '=')
+       line=$(grep -n $1 $file | cut -f 1 -d ':')
+       sed -i -e "$line s/$value/$2/g" $file	         
+    else
+      echo $1=$2 >> $file	    
+    fi
+    echo "$1=$2 is new var in tmux vars"    
+  ;;
+
+  1)
+    if grep $1 $file &> /dev/null; then
+       grep $1 $file > $filechoise
+    else
+       echo "$1 dont exits"
+       return 1
+    fi    
+    echo "$1 is fixed var now"
+  ;;
+
+  *)
+    echo "writevartmux name value : create/update vars"
+    echo "writevartmux name       : choise var"
+    return 1
+  ;;
+  esac
+}
+readvartmux(){
+  file="$HOME/.vars.txt"     	
+  filechoise="$HOME/.varschoise.txt"
+  case "$#" in
+  1)
+     grep "$1=" $file | cut -f 2 -d '='
+  ;;
+  *)  
+    while IFS= read -r line
+    do
+       grep "$( echo $line | cut -f1 -d '=' )=" $filechoise &>/dev/null && echo -n "--> "  
+       echo "$line" 
+    done < $file
+  ;;
+  esac
+}
