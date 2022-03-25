@@ -122,6 +122,7 @@ writevartmux(){
        sed -i -e "$line s/$value/$2/g" $file	         
     else
       echo $1=$2 >> $file	    
+      [ $( wc -l $file | awk '{print $1}' ) = "1" ] && echo $1=$2 > $filechoise
     fi
     echo "$1=$2 is new var in tmux vars"    
   ;;
