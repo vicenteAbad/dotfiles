@@ -4,6 +4,11 @@ Plug 'itchyny/lightline.vim'
 Plug 'lrvick/Conque-Shell'
 call plug#end()
 
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set hlsearch
+
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
